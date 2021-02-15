@@ -1,11 +1,11 @@
-n=[]
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-for i in range(3):
-    n.append(int(input()))
-
-result=n[0]*n[1]*n[2]
-d=str(result)
-
-
-for i in range(10):
-    print(d.count(str(i)))
+driver = webdriver.Chrome("C:\chromedriver.exe")
+driver.get("http://www.python.org")
+assert "Python" in driver.title
+elem = driver.find_element_by_name("q")
+elem.clear()
+elem.send_keys("pycon")
+elem.send_keys(Keys.RETURN)
+assert "No results found." not in driver.page_source
